@@ -21,7 +21,7 @@ Run the following in the /server directory:
 1. Install the client package globally
 
 `cd client`
-`npm install`
+`npm i`
 
 1. Start the client.
 
