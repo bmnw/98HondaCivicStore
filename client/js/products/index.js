@@ -1,28 +1,22 @@
 import { fetchProducts } from "../utils/api.js";
 
 async function productPage() {
-  const products = await fetchProducts();
+  try {
+    const products = await fetchProducts();
 
-  document.getElementById("page-title").innerHTML = "Products";
+    document.getElementById("page-title").innerHTML = "Products";
 
-  const productList = products.map((product) => {
-    return (
-      "<li>" +
-      "<b>" +
-      product.productName +
-      "</b>" +
-      "  " +
-      product.price +
-      "<br>" +
-      "<i>" +
-      product.description +
-      "</i>" +
-      "</li>"
-    );
-  });
-  const productHTMLList = productList.join("");
+    const productList = products.map((product) => {
+      return `<tr><td>${product.productName}</td><td>${product.description}</td><td>${product.price}</td></tr>`;
+    });
+    // const productHTMLList = productList.join("");
 
-  document.getElementById("app").innerHTML =
-    '<ul id="product-list">' + productHTMLList + "</ul>";
+    const tableHeader =
+      "<tr><th>Product Name </th><th>Product Desc </th><th>Product price </th></tr>";
+    document.getElementById("app").innerHTML =
+      "<table>" + tableHeader + productList + "</table>";
+  } catch (error) {
+    console.error("error with fetch", error);
+  }
 }
 export default productPage;
